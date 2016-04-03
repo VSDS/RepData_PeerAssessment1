@@ -23,13 +23,13 @@ Using the steps data available in Github, the following steps are required to be
 
 Load the libraries
 
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 #Load libraries
 library(ggplot2)
 library(lattice)
 ```
 Unzip the zip file and load the csv data
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 # Get the data files
 if(!file.exists("activity.csv"))
 {
@@ -42,7 +42,7 @@ stepsData <- read.csv("activity.csv")
 ###**2. Histogram of the total number of steps taken each day**
 Using aggregate function, summarize by date and plot histogram 
 
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 # Summarize the steps data by day and plot histogram
 stepsDataByDate <- aggregate(steps ~ date, data=stepsData, FUN=sum,na.rm=TRUE)
 hist(stepsDataByDate$steps,col = "blue",main = "Histogram of the total number of daily steps",xlab = "Total number of steps taken each day",breaks = 20)
@@ -51,7 +51,7 @@ hist(stepsDataByDate$steps,col = "blue",main = "Histogram of the total number of
 ###**3. Mean and median number of steps**
 Compute and display mean and median 
 
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 #Mean and median
 stepsMean <- mean(stepsDataByDate$steps)
 stepsMedian <- median(stepsDataByDate$steps)
@@ -61,7 +61,7 @@ stepsMedian
 
 ###**4. Time series plot of the average number of steps taken**
 Using aggregate function, summarize by interval and plot 
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 #Time series Plot
 stepsIntervalData <- aggregate(steps ~ interval, data=stepsData, FUN = mean, na.rm=TRUE)
 plot2 <- ggplot(stepsIntervalData, aes(interval, steps)) + geom_line(color = "blue") + labs(title = "Time Series Plot of the 5-minute Intervals", x = "Intervals (5 minute)", y = "Average number of steps taken")
@@ -70,13 +70,13 @@ print(plot2)
 
 ###**5. The 5-minute interval that contains the maximum number of steps**
 Using which.max, display the value
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 stepsIntervalData$interval[which.max(stepsIntervalData$steps)]
 ```
 
 ###**6. Code to describe and show a strategy for imputing missing data**
 Here we use the interval mean to replace the missing values
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 #Calculate number of missing values
 sum(is.na(stepsData))
 
@@ -94,12 +94,13 @@ write.csv(stepsDataImputed, "activity1.csv")
 ###**7. Histogram of the total daily steps after imputing missing values**
 Repeat the same as before (i.e., summarize by date and plot historgram) with the revised data.
 
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 # Summarize the steps data by day and plot histogram with new data (imputed)
 stepsDataByDateNew <- aggregate(steps ~ date, data=stepsDataImputed, FUN=sum, na.rm=TRUE)
 hist(stepsDataByDateNew$steps,col = "blue",main = "Histogram of the total number of daily steps (Imputed)",xlab = "Total number of steps taken each day",breaks = 20)
 ```
-```{r, echo=TRUE}
+Compute revised mean and median
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 #Mean and median with new data (imputed)
 stepsMeanNew <- mean(stepsDataByDateNew$steps)
 stepsMedianNew <- median(stepsDataByDateNew$steps)
@@ -111,7 +112,7 @@ Based on both of these, the imputing of interval means for missing values has no
 ###**8. Comparing daily steps across weekdays and weekends**
 
 First create a function to tell a daty if it is weekday or weekend
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 #Differences between Weekday and Weekends
 #Function to identify daytype
 daytype <- function(inputDate) 
@@ -124,12 +125,12 @@ daytype <- function(inputDate)
 }
 ```
 Next apply it for all the rows, so we know if a given date is weekday or weekend
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 #Add Weekday/Weekend information to data
 stepsDataImputed$daytype <- sapply(stepsDataImputed$date, daytype)
 ```
 Now aggregate across interval and day type, and plot
-```{r, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 # Summarize the steps data by day and plot with new data (imputed)
 stepsDataByDayType <- aggregate(stepsDataImputed$steps, list(stepsDataImputed$interval, stepsDataImputed$daytype),FUN = "mean")
 names(stepsDataByDayType) <- c("interval","daytype","mean.steps")
