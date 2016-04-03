@@ -42,7 +42,7 @@ stepsData <- read.csv("activity.csv")
 ###**2. Histogram of the total number of steps taken each day**
 Using aggregate function, summarize by date and plot histogram 
 
-```{r, eval=TRUE, include=TRUE, echo=TRUE, fig.keep="high"}
+```{r, echo=TRUE}
 # Summarize the steps data by day and plot histogram
 stepsDataByDate <- aggregate(steps ~ date, data=stepsData, FUN=sum,na.rm=TRUE)
 hist(stepsDataByDate$steps,col = "blue",main = "Histogram of the total number of daily steps",xlab = "Total number of steps taken each day",breaks = 20)
