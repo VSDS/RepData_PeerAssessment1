@@ -94,9 +94,9 @@ write.csv(stepsDataImputed, "activity1.csv")
 ###**7. Histogram of the total daily steps after imputing missing values**
 Repeat the same as before (i.e., summarize by date and plot historgram) with the revised data.
 
-```{r, eval=TRUE, include=TRUE, echo=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE, fig.keep="high"}
 # Summarize the steps data by day and plot histogram with new data (imputed)
-stepsDataByDateNew <- aggregate(steps ~ date, data=stepsDataImputed, FUN=sum, na.rm=TRUE, fig.keep="high")
+stepsDataByDateNew <- aggregate(steps ~ date, data=stepsDataImputed, FUN=sum, na.rm=TRUE)
 hist(stepsDataByDateNew$steps,col = "blue",main = "Histogram of the total number of daily steps (Imputed)",xlab = "Total number of steps taken each day",breaks = 20)
 ```
 Compute revised mean and median
