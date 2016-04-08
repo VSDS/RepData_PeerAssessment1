@@ -1,6 +1,8 @@
 ---
-title: "Reproducible Research - Peer Assessment 1"
-
+title: "Coursera Reproducible Research Assignment#1"
+author: "VSDS"
+date: "April 8, 2016"
+output: html_document
 ---
 
 #**Reproducible Research - Peer Assessment 1**
