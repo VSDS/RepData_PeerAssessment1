@@ -29,7 +29,14 @@ Using the steps data available in Github, the following steps are required to be
 
 Load the libraries
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
+#Global Option
+library(knitr)
+opts_chunk$set(echo=TRUE)
+
+```
+
+```{r}
 #Load libraries
 library(ggplot2)
 library(lattice)
